@@ -126,10 +126,10 @@ def export_scenario(oob_data, scenario_dir: str, map_name: str, oob_filename: st
                 pu = placed_lookup[i]
                 south = -1 * math.cos(math.radians(pu["rotation"]))
                 east = math.sin(math.radians(pu["rotation"]))
-                scenario_df.at[i, "south"] = pu["world_y"]
-                scenario_df.at[i, "east"] = pu["world_x"]
-                scenario_df.at[i, "dirSouth"] = south
-                scenario_df.at[i, "dirEast"] = east
+                scenario_df.at[i, "south"] = str(pu["world_y"])
+                scenario_df.at[i, "east"] = str(pu["world_x"])
+                scenario_df.at[i, "dirSouth"] = str(south)
+                scenario_df.at[i, "dirEast"] = str(east)
                 if pu.get("formation"):
                     scenario_df.at[i, "formation"] = pu["formation"]
 
@@ -152,10 +152,10 @@ def export_scenario(oob_data, scenario_dir: str, map_name: str, oob_filename: st
                     parent_pu = placed_lookup[pu["row_index"]]
                     south = -1 * math.cos(math.radians(parent_pu["rotation"]))
                     east = math.sin(math.radians(parent_pu["rotation"]))
-                    scenario_df.at[child_idx, "south"] = parent_pu["world_y"]
-                    scenario_df.at[child_idx, "east"] = parent_pu["world_x"]
-                    scenario_df.at[child_idx, "dirSouth"] = south
-                    scenario_df.at[child_idx, "dirEast"] = east
+                    scenario_df.at[child_idx, "south"] = str(parent_pu["world_y"])
+                    scenario_df.at[child_idx, "east"] = str(parent_pu["world_x"])
+                    scenario_df.at[child_idx, "dirSouth"] = str(south)
+                    scenario_df.at[child_idx, "dirEast"] = str(east)
                     auto_fill_indices.add(child_idx)
 
     # ── Filter to only placed (+ auto-filled) units ──────────────────
