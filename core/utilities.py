@@ -19,9 +19,13 @@ def get_tga_dimensions(filepath):
             }
             for match in header.finditer(data)
         ]
+        print(results)
         filtered_results = [x for x in results if x['width'] == x['height']]
         filtered_results = [x for x in filtered_results if x['width'] > 0 and x['height'] > 0]
         final_results = [x for x in filtered_results if x['width'] % 256 == 0 and x['height'] % 256 == 0]
+        if len(final_results) == 0:
+            print(f"No valid headers found in {filepath}. Results: {results}. Defaulting to 512x512. This may cause issues, please report if a map fails this and is not a 512x512 map.")
+            return 512, 512
         if len(final_results) > 1:
             print(f"Multiple valid headers found in {filepath}. Results: {final_results}. Returning the first one.")
         return final_results[0]['width'], final_results[0]['height']
